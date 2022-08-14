@@ -1,0 +1,17 @@
+<script>
+
+(async function fn() {
+	try {
+		const res = await fetch('https://kh.google.com/rt/earth/PlanetoidMetadata');
+		if (!(200 <= res.status && res.status <= 299)) throw 'Error: Status code ' + res.status;
+		const text = await res.text();
+		if (!text || text.length === 0) throw 'Error: Invalid response.';
+		document.body.innerText = 'OK';
+	} catch (error) {
+		document.body.innerText = JSON.stringify(error);
+	}
+})()
+.then(result => console.log(result))
+.catch(error => console.error(error));
+
+</script>
